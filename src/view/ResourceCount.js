@@ -6,7 +6,7 @@ function ResourceCount(props) {
 
   useEffect(() => {
     const subscription = resource_emitter.subscribe(x => {
-      setCount(x[props.resource])
+      setCount(Math.floor(x[props.resource]))
     });
     return () => {subscription.unsubscribe()}
   }, [props.resource])
