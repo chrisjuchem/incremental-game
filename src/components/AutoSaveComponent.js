@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import { useEffect } from "react";
 import { interval } from "rxjs";
 import { saveGame } from "../engine/savegame";
 
@@ -9,7 +9,7 @@ function AutoSaveComponent({saveInterval}) {
         );
 
         return () => subsciption.unsubscribe();
-    }, [])
+    }, [saveInterval])
 
     return null;
 }

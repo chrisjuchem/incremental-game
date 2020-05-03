@@ -1,26 +1,16 @@
-import {clock, TICK_LENGTH} from "./clock";
+import {clock, TICK_LENGTH} from "../clock";
 import {BehaviorSubject} from 'rxjs';
+import {ALL_RESOURCES} from "./resource";
 
-const raw = {
-    a: 0,
-    b: 0,
-    c: 2,
-};
+const resources = ALL_RESOURCES.reduce((acc, resource) => {
+    acc.raw[resource.name] = resource.initialCount;
+    acc.generation[resource.name] = resource.initialRate;
+    return acc;
+}, {raw: {}, generation: {}})
 
-// per second
-const generation = {
-    a: 0,
-    b: 0,
-    c: 0,
-};
-
-const resources = {
-    raw:raw,
-    generation: generation,
-}
 function _set_resources(data) {
-    Object.assign(raw, data.raw)
-    Object.assign(generation, data.generation)
+    Object.assign(resources.raw, data.raw)
+    Object.assign(resources.generation, data.generation)
 }
 
 const resource_emitter = new BehaviorSubject(resources);
@@ -33,7 +23,7 @@ function sendUpdate() {
 // Ensure we're not about to spend resources we don't have
 function updateValid(updateRaw) {
     return Object.entries(updateRaw).reduce(
-        (acc, [type, amnt]) => acc && -amnt <= raw[type],
+        (acc, [type, amnt]) => acc && -amnt <= resources.raw[type],
         true
     );
 }
@@ -43,9 +33,9 @@ function updateResources(updateRaw, updateGeneration) {
         return false;
     }
 
-    Object.entries(updateRaw).forEach(([type, amnt]) => raw[type] += amnt);
+    Object.entries(updateRaw).forEach(([type, amnt]) => resources.raw[type] += amnt);
     if (updateGeneration) {
-        Object.entries(updateGeneration).forEach(([type, amnt]) => generation[type] += amnt);
+        Object.entries(updateGeneration).forEach(([type, amnt]) => resources.generation[type] += amnt);
     }
 
     sendUpdate();
@@ -53,7 +43,7 @@ function updateResources(updateRaw, updateGeneration) {
 }
 
 clock.subscribe(() => {
-    for (let [resource, rate] of Object.entries(generation)) {
+    for (let [resource, rate] of Object.entries(resources.generation)) {
         resources.raw[resource] += TICK_LENGTH * rate / 1000.0;
     }
 

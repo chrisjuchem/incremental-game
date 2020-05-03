@@ -1,5 +1,5 @@
 
-import {_resources, _set_resources} from "./resources";
+import {_resources, _set_resources} from "./resources/resources";
 
 const COOKIE_KEY = "saved-game";
 

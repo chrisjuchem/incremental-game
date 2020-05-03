@@ -1,5 +1,5 @@
 import ResourceCount from "../components/ResourceCount";
-import {updateResources} from "../engine/resources";
+import {updateResources} from "../engine/resources/resources";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 

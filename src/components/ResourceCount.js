@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {resource_emitter} from "../engine/resources";
+import {resource_emitter} from "../engine/resources/resources";
 
 function ResourceCount(props) {
     let [rawCount, setRawCount] = useState(0);
