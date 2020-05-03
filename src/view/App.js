@@ -1,18 +1,10 @@
 import React from 'react';
 import './App.css';
-import ResourceCount from './ResourceCount'
-import {addResource} from '../engine/resources'
+import AppContainer from "../containers/AppContainer";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <ResourceCount resource='a'/>
-                <ResourceCount resource='b'/>
-                <ResourceCount resource='c'/>
-                <button className="btn btn-primary" onClick={() => addResource('b', 1)}>Add a 'B'</button>
-            </header>
-        </div>
+        <AppContainer/>
     );
 }
 
