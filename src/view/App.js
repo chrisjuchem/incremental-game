@@ -10,7 +10,7 @@ function App() {
                 <ResourceCount resource='a'/>
                 <ResourceCount resource='b'/>
                 <ResourceCount resource='c'/>
-                <button onClick={() => addResource('b', 1)}>Add a 'B'</button>
+                <button className="btn btn-primary" onClick={() => addResource('b', 1)}>Add a 'B'</button>
             </header>
         </div>
     );
