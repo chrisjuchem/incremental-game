@@ -1,24 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import ResourceCount from './ResourceCount'
+import {addResource} from '../engine/resources'
 
 function App() {
-  let [r, setR] = useState(null)
-  useEffect(() => {
-    setTimeout(() => {
-      setR(<ResourceCount/>)
-    }, 5000)
-    setTimeout(() => {
-      setR(<><ResourceCount/><ResourceCount/></>)
-    }, 10000)
-  }, []);
-
-
   return (
     <div className="App">
       <header className="App-header">
-        <ResourceCount/>
-        {r}
+        <ResourceCount resource='a'/>
+        <ResourceCount resource='b'/>
+        <ResourceCount resource='c'/>
+        <button onClick={() => addResource('b', 1)}>Add a 'B'</button>
       </header>
     </div>
   );

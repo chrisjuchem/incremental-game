@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {clock} from '../engine/clock'
+import {resource_emitter} from "../engine/resources";
 
-function ResourceCount() {
+function ResourceCount(props) {
   let [count, setCount] = useState();
 
   useEffect(() => {
-    const subscription = clock.subscribe(x => {
-      setCount(x)
+    const subscription = resource_emitter.subscribe(x => {
+      setCount(x[props.resource])
     });
     return () => {subscription.unsubscribe()}
-  }, [])
+  }, [props.resource])
+
+  useEffect(() =>
+    console.log("render " + props.resource)
+  )
 
   return (<div>
     <p>
-      {count}
+      {props.resource}: {count}
     </p>
   </div>);
 }
