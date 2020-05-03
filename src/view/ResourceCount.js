@@ -17,11 +17,12 @@ function ResourceCount(props) {
         console.log("render " + props.resource)
     )
 
-    return (<div>
-        <p>
-            {props.resource}: {count}
-        </p>
-    </div>);
+    return (
+        <div>
+            <p>
+                {props.resource}: {count}
+            </p>
+        </div>);
 }
 
 export default ResourceCount;
