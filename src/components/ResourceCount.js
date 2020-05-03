@@ -1,28 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {resource_emitter} from "../engine/resources/resources";
+import React, { useEffect, useState } from 'react';
+import { RESOURCES } from "../engine/resources/resource";
 
-function ResourceCount(props) {
-    let [rawCount, setRawCount] = useState(0);
-    let [generationCount, setGenerationCount] = useState(0);
+function ResourceCount({resource}) {
+    let [count, setCount] = useState(0);
+    let [rate, setRate] = useState(0);
 
     useEffect(() => {
-        const subscription = resource_emitter.subscribe(x => {
-            setRawCount(Math.floor(x.raw[props.resource]))
-            setGenerationCount(Math.floor(x.generation[props.resource]))
+        const subscription = RESOURCES[resource].subscribe(x => {
+            setCount(Math.floor(x.count));
+            setRate(Math.floor(x.rate));
         });
         return () => {
             subscription.unsubscribe()
         }
-    }, [props.resource])
+    }, [resource])
 
     // useEffect(() =>
-    //     console.log("render " + props.resource)
+    //     console.log("render " + resource)
     // )
 
     return (
         <div>
             <p>
-                {props.resource}: {rawCount} ({generationCount}/s)
+                {resource}: {count} ({rate}/s)
             </p>
         </div>
     );

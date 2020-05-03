@@ -1,7 +1,7 @@
 import ResourceCount from "../components/ResourceCount";
-import {updateResources} from "../engine/resources/resources";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
+import BuyButton from "../components/BuyButton";
 
 
 class GameContainer extends React.Component {
@@ -19,17 +19,10 @@ class GameContainer extends React.Component {
                     <ResourceCount resource='c'/>
                 </div>
                 <div className="row">
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({b: 1})}>Add a 'B'</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({a: -5, b:-5, c:1})}>5A, 5B -> C</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({c:-2}, {a:1})}>2C -> A++</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({c:-10}, {b:1})}>10C -> B++</button>
+                    <BuyButton resource={'b'} operation={'click'}/>
+                    <BuyButton resource={'c'} operation={'convert'}/>
+                    <BuyButton resource={'a'} operation={'a++'}/>
+                    <BuyButton resource={'b'} operation={'b++'}/>
                 </div>
             </div>
         );
