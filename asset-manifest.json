@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/incremental-game/static/css/main.830ce905.chunk.css",
+    "main.js": "/incremental-game/static/js/main.5201b757.chunk.js",
+    "main.js.map": "/incremental-game/static/js/main.5201b757.chunk.js.map",
+    "runtime-main.js": "/incremental-game/static/js/runtime-main.90a88586.js",
+    "runtime-main.js.map": "/incremental-game/static/js/runtime-main.90a88586.js.map",
+    "static/js/2.fa65d022.chunk.js": "/incremental-game/static/js/2.fa65d022.chunk.js",
+    "static/js/2.fa65d022.chunk.js.map": "/incremental-game/static/js/2.fa65d022.chunk.js.map",
+    "index.html": "/incremental-game/index.html",
+    "precache-manifest.3c7232326649de4b424f487e2e785e49.js": "/incremental-game/precache-manifest.3c7232326649de4b424f487e2e785e49.js",
+    "service-worker.js": "/incremental-game/service-worker.js",
+    "static/css/main.830ce905.chunk.css.map": "/incremental-game/static/css/main.830ce905.chunk.css.map",
+    "static/js/2.fa65d022.chunk.js.LICENSE.txt": "/incremental-game/static/js/2.fa65d022.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.90a88586.js",
+    "static/js/2.fa65d022.chunk.js",
+    "static/css/main.830ce905.chunk.css",
+    "static/js/main.5201b757.chunk.js"
+  ]
+}
