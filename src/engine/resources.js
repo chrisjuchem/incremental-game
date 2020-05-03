@@ -4,12 +4,12 @@ import {BehaviorSubject} from 'rxjs';
 const raw = {
     a: 0,
     b: 0,
-    c: 0,
+    c: 2,
 };
 
 // per second
 const generation = {
-    a: 1,
+    a: 0,
     b: 0,
     c: 0,
 };
@@ -18,8 +18,12 @@ const resources = {
     raw:raw,
     generation: generation,
 }
+function _set_resources(data) {
+    Object.assign(raw, data.raw)
+    Object.assign(generation, data.generation)
+}
 
-const resource_emitter = new BehaviorSubject(resources);//clock.pipe(map(() => resources))
+const resource_emitter = new BehaviorSubject(resources);
 // resource_emitter.subscribe(x => console.log(x))
 
 function sendUpdate() {
@@ -56,4 +60,4 @@ clock.subscribe(() => {
     sendUpdate()
 })
 
-export {resource_emitter, updateResources};
+export {resource_emitter, updateResources, resources as _resources, _set_resources};

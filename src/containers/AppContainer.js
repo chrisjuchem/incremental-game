@@ -1,41 +1,21 @@
-import React from "react";
-import ResourceCount from "../view/ResourceCount";
-import {updateResources} from "../engine/resources";
+import React, { useState }  from "react";
 import './AppContainer.css';
+import GameContainer from "./GameContainer";
+import MainMenu from "../components/MainMenu";
 
-class AppContainer extends React.Component {
-    render = () =>
+function AppContainer() {
+    let [inGame, setInGame] = useState(false);
+
+    return (
         <div className="bg-dark vh-100">
-
             <div className="container text-light">
                 <div className="row pt-3">
                     <h1>Untitled Incremental Game</h1>
                 </div>
-                <div className="row">
-                    <ResourceCount resource='a'/>
-                </div>
-                <div className="row">
-                    <ResourceCount resource='b'/>
-                </div>
-                <div className="row">
-                    <ResourceCount resource='c'/>
-                </div>
-                <div className="row">
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({b: 1})}>Add a 'B'</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({a: -5, b:-5, c:1})}>5A, 5B -> C</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({c:-2}, {a:1})}>2C -> A++</button>
-
-                    <button className="btn btn-primary"
-                            onClick={() => updateResources({c:-10}, {b:1})}>10C -> B++</button>
-                </div>
+                {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
             </div>
-
         </div>
+    );
 }
 
 export default AppContainer;

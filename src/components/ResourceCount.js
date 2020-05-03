@@ -24,7 +24,8 @@ function ResourceCount(props) {
             <p>
                 {props.resource}: {rawCount} ({generationCount}/s)
             </p>
-        </div>);
+        </div>
+    );
 }
 
 export default ResourceCount;
