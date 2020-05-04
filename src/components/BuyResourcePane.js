@@ -1,14 +1,13 @@
 import React from "react";
 import BuyButton from "./BuyButton";
 
-function BuyResourcePane() {
+function BuyResourcePane({recipes}) {
     return(
         <div className='row'>
             <div className='container-fluid p-0'>
-                <BuyButton recipe={'click'}/>
-                <BuyButton recipe={'convert'}/>
-                <BuyButton recipe={'a++'}/>
-                <BuyButton recipe={'b++'}/>
+                {
+                    recipes.map(r => <BuyButton recipe={r} key={r}/>)
+                }
             </div>
 
         </div>
