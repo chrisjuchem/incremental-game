@@ -1,6 +1,5 @@
 import {RESOURCES} from "./resources/resource";
 
-
 const SAVE_KEY = "saved-game";
 
 function saveGame() {
@@ -8,8 +7,6 @@ function saveGame() {
         acc[name] = {count: resource.count, rate: resource.rate};
         return acc;
     }, {})
-    console.log(data);
-
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
 }
 
