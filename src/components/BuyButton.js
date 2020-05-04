@@ -16,7 +16,7 @@ function BuyButton({recipe}) {
                 {
                     Object.entries(RECIPES[recipe].price)
                         .map(([k,v]) =>
-                            <div>
+                            <div key={`${recipe}_entries_${k}`}>
                                 {`${k}: ${v}`}
                             </div>
                         )
@@ -27,7 +27,7 @@ function BuyButton({recipe}) {
                 {
                     Object.entries(RECIPES[recipe].result)
                         .map(([k,v]) =>
-                            <div>
+                            <div key={`${recipe}_results_${k}`}>
                                 {k}:
                                 <br/>
                                 {

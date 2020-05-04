@@ -2,6 +2,7 @@ import ResourceCount from "../components/ResourceCount";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 import BuyResourcePane from "../components/BuyResourcePane";
+import {RECIPES} from "../engine/resources/recipe";
 
 
 class GameContainer extends React.Component {
@@ -18,7 +19,7 @@ class GameContainer extends React.Component {
                 <div className="row">
                     <ResourceCount resource='c'/>
                 </div>
-                <BuyResourcePane/>
+                <BuyResourcePane recipes={Object.keys(RECIPES)}/>
             </div>
         );
     }
