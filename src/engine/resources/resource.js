@@ -2,11 +2,10 @@ import { clock, TICK_LENGTH } from "../clock";
 import { BehaviorSubject } from "rxjs";
 
 class ResourceConfig {
-    constructor(name, opts) {
+    constructor(name, initialCount, initialRate, ) {
         this.name = name;
-        this.initialCount = opts.initialCount || 0;
-        this.initialRate = opts.initialRate || 0;
-        this.prices = opts.prices || {};
+        this.initialCount = initialCount || 0;
+        this.initialRate = initialRate || 0;
     }
 }
 
@@ -48,42 +47,13 @@ class Resource extends BehaviorSubject {
     }
 }
 
+const configArray = [
+    new ResourceConfig('a'),
+    new ResourceConfig('b'),
+    new ResourceConfig('c', 2),
+]
 
-const a = new ResourceConfig('a', {
-    // prices: {
-    //     'a++': {
-    //         price: {c:2},
-    //         rate: 1,
-    //     }
-    // }
-});
-
-const b = new ResourceConfig('b', {
-    // prices: {
-    //     "click": {
-    //         price: {},
-    //         count: 1.
-    //     },
-    //     "b++": {
-    //         price: {c:10},
-    //         rate: 1,
-    //     },
-    // },
-});
-
-const c = new ResourceConfig('c', {
-    // initialCount: 2,
-    // prices: {
-    //     "convert": {
-    //         price: {a:5, b:5},
-    //         count: 1
-    //     },
-    // },
-});
-
-const ALL_CONFIGS = [a, b, c]
-
-export const RESOURCES = ALL_CONFIGS.reduce(
+export const RESOURCES = configArray.reduce(
     (acc, config) => {
         acc[config.name] = new Resource(config);
         return acc;
