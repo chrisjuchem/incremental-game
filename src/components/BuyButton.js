@@ -1,20 +1,21 @@
 import React from "react";
 import {RESOURCES} from "../engine/resources/resource";
+import {RECIPES} from "../engine/resources/recipe";
 
-function BuyButton({resource, operation}) {
+function BuyButton({recipe}) {
 
     return (
         <div className="row mb-4">
             <div className="col-3">
                 <button className="btn btn-primary btn-block"
-                        onClick={() => RESOURCES[resource].buy(operation)}>
-                    {operation}
+                        onClick={() => RECIPES[recipe].buy()}>
+                    {recipe}
                 </button>
             </div>
             <div className="col-auto">
                 Costs:
                 {
-                    Object.entries(RESOURCES[resource].config.prices[operation].price)
+                    Object.entries(RECIPES[recipe].price)
                         .map(([k,v]) =>
                             <div>
                                 {`${k}: ${v}`}
@@ -23,20 +24,19 @@ function BuyButton({resource, operation}) {
                 }
             </div>
             <div className="col-auto">
-                Produces {resource}:
+                Produces:
                 {
-                    Object.entries(RESOURCES[resource].config.prices[operation])
-                        .map(([k,v]) => {
-                            if (k === 'price') {
-                                return <></>
-                            } else {
-                                return(
-                                    <div>
-                                        {`${k}: ${v}`}
-                                    </div>
-                                )
-                            }
-                        })
+                    Object.entries(RECIPES[recipe].result)
+                        .map(([k,v]) =>
+                            <div>
+                                {k}:
+                                <br/>
+                                {
+                                    Object.entries(v)
+                                        .map(([k,v]) => `${k}: ${v}`)
+                                }
+                            </div>
+                        )
                 }
             </div>
 
