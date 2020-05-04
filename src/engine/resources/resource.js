@@ -23,6 +23,14 @@ class Resource extends BehaviorSubject {
         })
     }
 
+    update(amnts) {
+        if (!amnts) {
+            return false;
+        }
+        this.updateCount(amnts.count);
+        this.updateRate(amnts.rate);
+    }
+
     updateCount(amnt) {
         if (!amnt) {
             return false;
@@ -38,56 +46,39 @@ class Resource extends BehaviorSubject {
         this.rate += amnt;
         this.next(this);
     }
-
-    buy(operation) {
-        const priceConfig = this.config.prices[operation]
-        if (!priceConfig) {
-            return false;
-        }
-
-        const price = priceConfig.price;
-
-        if (!isAffordable(price)) {
-            return false;
-        }
-
-        Object.entries(price).forEach(([type, amnt]) => RESOURCES[type].updateCount(-amnt));
-        this.updateCount(priceConfig.count);
-        this.updateRate(priceConfig.rate);
-    }
 }
 
 
 const a = new ResourceConfig('a', {
-    prices: {
-        'a++': {
-            price: {c:2},
-            rate: 1,
-        }
-    }
+    // prices: {
+    //     'a++': {
+    //         price: {c:2},
+    //         rate: 1,
+    //     }
+    // }
 });
 
 const b = new ResourceConfig('b', {
-    prices: {
-        "click": {
-            price: {},
-            count: 1.
-        },
-        "b++": {
-            price: {c:10},
-            rate: 1,
-        },
-    },
+    // prices: {
+    //     "click": {
+    //         price: {},
+    //         count: 1.
+    //     },
+    //     "b++": {
+    //         price: {c:10},
+    //         rate: 1,
+    //     },
+    // },
 });
 
 const c = new ResourceConfig('c', {
-    initialCount: 2,
-    prices: {
-        "convert": {
-            price: {a:5, b:5},
-            count: 1
-        },
-    },
+    // initialCount: 2,
+    // prices: {
+    //     "convert": {
+    //         price: {a:5, b:5},
+    //         count: 1
+    //     },
+    // },
 });
 
 const ALL_CONFIGS = [a, b, c]
@@ -97,9 +88,3 @@ export const RESOURCES = ALL_CONFIGS.reduce(
         acc[config.name] = new Resource(config);
         return acc;
     }, {})
-
-const isAffordable = (price) =>
-    Object.entries(price).reduce(
-        (acc, [type, amnt]) => acc && amnt <= RESOURCES[type].count,
-        true
-    );
