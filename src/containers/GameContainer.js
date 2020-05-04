@@ -2,6 +2,7 @@ import ResourceCount from "../components/ResourceCount";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 import BuyButton from "../components/BuyButton";
+import BuyResourcePane from "../components/BuyResourcePane";
 
 
 class GameContainer extends React.Component {
@@ -18,12 +19,7 @@ class GameContainer extends React.Component {
                 <div className="row">
                     <ResourceCount resource='c'/>
                 </div>
-                <div className="row">
-                    <BuyButton resource={'b'} operation={'click'}/>
-                    <BuyButton resource={'c'} operation={'convert'}/>
-                    <BuyButton resource={'a'} operation={'a++'}/>
-                    <BuyButton resource={'b'} operation={'b++'}/>
-                </div>
+                <BuyResourcePane/>
             </div>
         );
     }
