@@ -7,7 +7,7 @@ function MainMenu({setInGame}) {
             <button className="btn btn-primary"
                     onClick={() => setInGame(true)}>New Game</button>
             <button className={`btn btn-primary${ saveValid() ? "" : " d-none"}`}
-                    onClick={() => {loadGame(); setInGame(true);}}>Load Game</button>
+                    onClick={() => {loadGame(); setInGame(true);}}>Continue</button>
         </div>
     );
 }

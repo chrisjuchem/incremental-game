@@ -1,5 +1,4 @@
 import React from "react";
-import {RESOURCES} from "../engine/resources/resource";
 import {RECIPES} from "../engine/resources/recipe";
 
 function BuyButton({recipe}) {

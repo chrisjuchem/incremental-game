@@ -1,7 +1,6 @@
 import ResourceCount from "../components/ResourceCount";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
-import BuyButton from "../components/BuyButton";
 import BuyResourcePane from "../components/BuyResourcePane";
 
 
