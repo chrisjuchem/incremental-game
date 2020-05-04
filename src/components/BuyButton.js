@@ -17,7 +17,7 @@ function BuyButton({recipe}) {
                     Object.entries(RECIPES[recipe].price)
                         .map(([k,v]) =>
                             <div key={`${recipe}_entries_${k}`}>
-                                {`${k}: ${v}`}
+                                {`${v} ${k}`}
                             </div>
                         )
                 }
@@ -26,13 +26,11 @@ function BuyButton({recipe}) {
                 Produces:
                 {
                     Object.entries(RECIPES[recipe].result)
-                        .map(([k,v]) =>
-                            <div key={`${recipe}_results_${k}`}>
-                                {k}:
-                                <br/>
+                        .map(([resource,data]) =>
+                            <div key={`${recipe}_results_${resource}`}>
                                 {
-                                    Object.entries(v)
-                                        .map(([k,v]) => `${k}: ${v}`)
+                                    Object.entries(data)
+                                        .map(([k,v]) => `${v} ${resource}${k === 'rate' ? '/s' : ''}`)
                                 }
                             </div>
                         )
