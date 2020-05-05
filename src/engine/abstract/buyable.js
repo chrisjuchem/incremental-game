@@ -12,7 +12,7 @@ class Buyable {
         );
     }
 
-    buy(amount) {
+    buy(amount=1) {
         if (!this.isAffordable(amount)) {
             return false;
         }
