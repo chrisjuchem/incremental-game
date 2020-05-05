@@ -12,16 +12,17 @@ class ResourceGenerator extends Generator {
     }
 }
 
-class Resource extends BehaviorSubject {
+class Resource {
     constructor(name, initialCount=0, initialRate=0) {
-        super({count:initialCount, rate:initialRate});
         this.name = name;
         this.count = initialCount;
         this.generator = new ResourceGenerator(this, initialRate);
+
+        this.emitter = new BehaviorSubject({count:initialCount, rate:initialRate});
     }
 
     broadcast() {
-        this.next({
+        this.emitter.next({
             count: this.count,
             rate: this.generator.baseTime * this.generator.upgrades / 1000.0,
         })

@@ -6,7 +6,7 @@ function ResourceCount({resource}) {
     let [rate, setRate] = useState(0);
 
     useEffect(() => {
-        const subscription = RESOURCES[resource].subscribe(x => {
+        const subscription = RESOURCES[resource].emitter.subscribe(x => {
             setCount(Math.floor(x.count));
             setRate(Math.floor(x.rate));
         });

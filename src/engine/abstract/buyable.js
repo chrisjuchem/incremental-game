@@ -5,23 +5,23 @@ class Buyable {
         this.price = price;
     }
 
-    isAffordable() {
+    isAffordable(amount=1) {
         return Object.entries(this.price).reduce(
-            (acc, [type, amnt]) => acc && amnt <= RESOURCES[type].count,
+            (acc, [type, amnt]) => acc && ((amnt * amount) <= RESOURCES[type].count),
             true
         );
     }
 
-    buy() {
-        if (!this.isAffordable()) {
+    buy(amount) {
+        if (!this.isAffordable(amount)) {
             return false;
         }
 
-        Object.entries(this.price).forEach(([type, amnt]) => RESOURCES[type].updateCount(-amnt));
-        this.giveBuyResult();
+        Object.entries(this.price).forEach(([type, amnt]) => RESOURCES[type].updateCount(-amnt * amount));
+        this.giveBuyResult(amount);
     }
 
-    giveBuyResult() {
+    giveBuyResult(amount) {
         console.warn("Buyable did not overwrite giveResult.")
     }
 }
