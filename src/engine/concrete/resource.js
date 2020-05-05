@@ -22,10 +22,7 @@ class Resource {
     }
 
     broadcast() {
-        this.emitter.next({
-            count: this.count,
-            rate: this.generator.baseTime * this.generator.upgrades / 1000.0,
-        })
+        this.emitter.next(this.serialize())
     }
 
     update(amnts) {
@@ -51,7 +48,24 @@ class Resource {
         }
         this.generator.upgrade(amnt);
 
-        this.broadcast()
+        this.broadcast();
+    }
+
+    serialize() {
+        return {
+            count: this.count,
+            rate: this.generator.upgrades //this.generator.baseTime * this.generator.upgrades / 1000.0,
+        };
+    }
+
+    deserializable(data) {
+        return !!(data && data.count !== undefined && data.rate !== undefined);
+    }
+
+    deserialize(data) {
+        this.count = data.count;
+        this.generator.upgrades = data.rate;
+        this.broadcast();
     }
 }
 

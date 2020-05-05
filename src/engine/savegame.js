@@ -4,7 +4,7 @@ const SAVE_KEY = "saved-game";
 
 function saveGame() {
     const data = Object.entries(RESOURCES).reduce((acc, [name, resource]) => {
-        acc[name] = {count: resource.count, rate: resource.rate};
+        acc[name] = resource.serialize();
         return acc;
     }, {})
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
@@ -14,15 +14,14 @@ function saveGame() {
 function loadGame() {
     const parsed = JSON.parse(localStorage.getItem(SAVE_KEY));
     Object.entries(parsed).forEach(([name, data]) => {
-        RESOURCES[name].count = data.count;
-        RESOURCES[name].rate = data.rate;
+        RESOURCES[name].deserialize(data);
     })
 }
 
 function saveValid() {
     const parsed = JSON.parse(localStorage.getItem(SAVE_KEY));
     return !!parsed && Object.entries(parsed).reduce((acc, [name, data]) => {
-        return !!(acc && RESOURCES[name] && data && data.count !== undefined && data.rate !== undefined);
+        return !!(acc && RESOURCES[name] && RESOURCES[name].deserializable(data));
     }, true);
 }
 
