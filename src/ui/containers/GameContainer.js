@@ -2,7 +2,7 @@ import ResourceCount from "../components/ResourceCount";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React, {useContext} from "react";
 import BuyResourcePane from "../components/BuyResourcePane";
-import {RECIPES} from "../../engine/resources/recipe";
+import {RECIPES} from "../../engine/concrete/recipe";
 import ContextProvider from "../components/debug/ContextProvider";
 import {DebugContext} from "../contexts";
 

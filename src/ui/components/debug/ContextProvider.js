@@ -1,5 +1,4 @@
-import React, {useContext, useEffect} from "react"
-import {RESOURCES} from "../../../engine/resources/resource";
+import React, {useContext} from "react"
 import {DebugContext} from "../../contexts";
 import DebugList from "./DebugList";
 

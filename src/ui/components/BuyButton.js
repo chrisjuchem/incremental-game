@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {RECIPES} from "../../engine/resources/recipe";
+import {RECIPES} from "../../engine/concrete/recipe";
 import {DebugContext} from "../contexts";
 
 function BuyButton({recipe}) {

@@ -1,4 +1,4 @@
-import {RESOURCES} from "./resources/resource";
+import {RESOURCES} from "./concrete/resource";
 
 const SAVE_KEY = "saved-game";
 
