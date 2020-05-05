@@ -1,13 +1,19 @@
-import React from "react";
-import {RECIPES} from "../engine/resources/recipe";
+import React, {useContext} from "react";
+import {RECIPES} from "../../engine/resources/recipe";
+import {DebugContext} from "../contexts";
 
 function BuyButton({recipe}) {
+
+    let context = useContext(DebugContext);
 
     return (
         <div className="row mb-4">
             <div className="col-3">
                 <button className="btn btn-primary btn-block"
-                        onClick={() => RECIPES[recipe].buy()}>
+                        onClick={() => {
+                            context.log(`bought ${recipe}`)
+                            RECIPES[recipe].buy()
+                        }}>
                     {recipe}
                 </button>
             </div>

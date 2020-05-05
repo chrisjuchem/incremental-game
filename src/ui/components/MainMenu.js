@@ -1,5 +1,5 @@
 import React from "react";
-import {loadGame, saveValid} from "../engine/savegame";
+import {loadGame, saveValid} from "../../engine/savegame";
 
 function MainMenu({setInGame}) {
     return (
