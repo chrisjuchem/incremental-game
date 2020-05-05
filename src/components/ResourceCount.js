@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RESOURCES } from "../engine/resources/resource";
+import { RESOURCES } from "../engine/concrete/resource";
 
 function ResourceCount({resource}) {
     let [count, setCount] = useState(0);

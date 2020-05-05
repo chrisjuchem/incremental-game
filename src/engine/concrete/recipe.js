@@ -1,25 +1,14 @@
 import {RESOURCES} from "./resource";
+import Buyable from "../abstract/buyable";
 
-class Recipe {
+class Recipe extends Buyable{
     constructor(name, price, result) {
+        super(price)
         this.name = name;
-        this.price = price;
         this.result = result;
     }
 
-    isAffordable() {
-        return Object.entries(this.price).reduce(
-            (acc, [type, amnt]) => acc && amnt <= RESOURCES[type].count,
-            true
-        );
-    }
-
-    buy() {
-        if (!this.isAffordable()) {
-            return false;
-        }
-
-        Object.entries(this.price).forEach(([type, amnt]) => RESOURCES[type].updateCount(-amnt));
+    giveBuyResult() {
         Object.entries(this.result).forEach(([type, result]) => RESOURCES[type].update(result));
     }
 }
