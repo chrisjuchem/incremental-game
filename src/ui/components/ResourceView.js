@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { RESOURCES } from "../../engine/concrete/resource";
+import GeneratorView from "./GeneratorView";
 
-function ResourceCount({resource}) {
+function ResourceView({resource}) {
     let [count, setCount] = useState(0);
     let [rate, setRate] = useState(0);
 
@@ -21,11 +22,11 @@ function ResourceCount({resource}) {
 
     return (
         <div>
-            <p>
-                {resource}: {count} ({rate}/s)
-            </p>
+            <div>
+                {resource}: {count} <GeneratorView generator={RESOURCES[resource].generator} showBar={true}/>
+            </div>
         </div>
     );
 }
 
-export default ResourceCount;
+export default ResourceView;

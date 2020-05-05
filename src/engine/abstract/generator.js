@@ -1,10 +1,13 @@
 import {clock} from "../clock";
+import {BehaviorSubject} from "rxjs";
 
 class Generator {
     constructor(baseTime, initialUpgrades=0) {
         this.baseTime = baseTime;
         this.upgrades = initialUpgrades;
         this.accumulated = 0;
+
+        this.emitter = new BehaviorSubject(this.message());
 
         clock.subscribe((ms) => {
             this.accumulated += ms * this.upgrades;
@@ -13,7 +16,13 @@ class Generator {
             if (generated) {
                 this.generate(generated)
             }
+            console.log(this.message())
+            this.emitter.next(this.message())
         })
+    }
+
+    getRate() {
+        return this.baseTime * this.upgrades / 1000;
     }
 
     generate(amount) {
@@ -21,8 +30,12 @@ class Generator {
     }
 
     upgrade(times) {
-        console.log(times);
         this.upgrades += times;
+        this.emitter.next(this.message())
+    }
+
+    message() {
+        return {rate: this.getRate(), progress: this.accumulated / this.baseTime};
     }
 }
 

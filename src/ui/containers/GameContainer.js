@@ -1,4 +1,4 @@
-import ResourceCount from "../components/ResourceCount";
+import ResourceView from "../components/ResourceView";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React, {useContext} from "react";
 import BuyResourcePane from "../components/BuyResourcePane";
@@ -15,13 +15,13 @@ function GameContainer() {
         <div className="container game-container">
             <AutoSaveComponent saveInterval={5}/>
             <div className="row">
-                <ResourceCount resource='a'/>
+                <ResourceView resource='a'/>
             </div>
             <div className="row">
-                <ResourceCount resource='b'/>
+                <ResourceView resource='b'/>
             </div>
             <div className="row">
-                <ResourceCount resource='c'/>
+                <ResourceView resource='c'/>
             </div>
             <BuyResourcePane recipes={Object.keys(RECIPES)}/>
             <ContextProvider/>
