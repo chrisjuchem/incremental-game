@@ -8,14 +8,14 @@ function AutoSaveComponent({saveInterval}) {
     let context = useContext(DebugContext);
 
     useEffect(() => {
-        const subsciption = interval(1000*saveInterval).subscribe(
+        const subscription = interval(1000*saveInterval).subscribe(
             () => {
                 context.log('Game saved.');
                 saveGame()
             }
         );
 
-        return () => subsciption.unsubscribe();
+        return () => subscription.unsubscribe();
     }, [context, saveInterval])
 
     return null;
