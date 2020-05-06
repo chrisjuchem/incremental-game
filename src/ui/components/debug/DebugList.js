@@ -7,11 +7,9 @@ function DebugList({history}) {
 
     return(
         <div className="list-group max-vh-20 overflow-auto">
-            {console.log(history)}
             {
-                history.map(entry => {
-                    console.log(entry);
-                    return <DebugListItem timestamp={entry[0]} string={entry[1]}/>
+                history.map((entry, idx) => {
+                    return <DebugListItem timestamp={entry[0]} string={entry[1]} key={idx}/>
                 })
             }
         </div>

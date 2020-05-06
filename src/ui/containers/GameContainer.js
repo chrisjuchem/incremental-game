@@ -1,15 +1,12 @@
 import ResourceView from "../components/ResourceView";
 import AutoSaveComponent from "../components/AutoSaveComponent";
-import React, {useContext} from "react";
+import React from "react";
 import BuyResourcePane from "../components/BuyResourcePane";
 import {RECIPES} from "../../engine/concrete/recipe";
-import ContextProvider from "../components/debug/ContextProvider";
-import {DebugContext} from "../contexts";
+import DebugContextProvider from "../components/debug/DebugContextProvider";
 
 
 function GameContainer() {
-
-    let context = useContext(DebugContext);
 
     return (
         <div className="container game-container">
@@ -24,7 +21,7 @@ function GameContainer() {
                 <ResourceView resource='c'/>
             </div>
             <BuyResourcePane recipes={Object.keys(RECIPES)}/>
-            <ContextProvider/>
+            <DebugContextProvider/>
         </div>
     );
 }

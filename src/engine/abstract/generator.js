@@ -16,7 +16,6 @@ class Generator {
             if (generated) {
                 this.generate(generated)
             }
-            console.log(this.message())
             this.emitter.next(this.message())
         })
     }

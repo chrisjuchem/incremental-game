@@ -17,18 +17,25 @@ function AppContainer() {
                 })
             },
             log: (obj) => setDebugContext(prevState => {
-                if (prevState.doLog) {
-                    let date = new Date();
-                    let timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
-                    let logString = String(obj);
-                    prevState.history.push([timestamp, logString])
-                }
+                let date = new Date();
+                let timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
+                let logString = String(obj);
+                prevState.history.push([timestamp, logString])
                 return {...prevState, history: [...prevState.history]}
             })
         }
     );
 
-    useEffect(() => console.log(debugContext.doLog));
+    useEffect(() => {
+        let debugKeypressHandler = (event) => {
+            if (event.key === 'd') {
+                debugContext.toggleLog()
+            }
+        };
+
+        window.addEventListener('keydown', debugKeypressHandler);
+        return () => window.removeEventListener('keydown', debugKeypressHandler)
+    }, [debugContext]);
 
     return (
         <DebugContext.Provider value={debugContext}>

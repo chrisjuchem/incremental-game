@@ -16,7 +16,7 @@ function AutoSaveComponent({saveInterval}) {
         );
 
         return () => subsciption.unsubscribe();
-    }, [saveInterval])
+    }, [context, saveInterval])
 
     return null;
 }

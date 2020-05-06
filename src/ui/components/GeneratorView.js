@@ -7,7 +7,6 @@ function GeneratorView({generator, showBar=false}) {
 
     useEffect(() => {
         const subscription = generator.emitter.subscribe(x => {
-            console.log(x);
             setProgress(x.progress);
             setRate(x.rate);
         });
