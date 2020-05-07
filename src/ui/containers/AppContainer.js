@@ -51,15 +51,13 @@ function AppContainer() {
 
     return (
         <DebugContext.Provider value={debugContext}>
-            <div className="bg-dark vh-100">
-                <div className="container text-light">
-                    <div className="row pt-3">
-                        <h1>Untitled Incremental Game</h1>
-                    </div>
-                    {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
-                    <br/>
-                    <DebugContextProvider/>
+            <div className="container text-light">
+                <div className="row pt-3">
+                    <h1>Untitled Incremental Game</h1>
                 </div>
+                {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
+                <br/>
+                <DebugContextProvider/>
             </div>
         </DebugContext.Provider>
     );
