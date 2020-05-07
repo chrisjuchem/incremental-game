@@ -21,7 +21,6 @@ function GameContainer() {
                 <ResourceView resource='c'/>
             </div>
             <BuyResourcePane recipes={Object.keys(RECIPES)}/>
-            <DebugContextProvider/>
         </div>
     );
 }

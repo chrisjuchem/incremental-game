@@ -10,7 +10,6 @@ function AutoSaveComponent({saveInterval}) {
     useEffect(() => {
         const subscription = interval(1000*saveInterval).subscribe(
             () => {
-                context.log('Game saved.');
                 saveGame()
             }
         );

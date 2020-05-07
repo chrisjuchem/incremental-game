@@ -1,15 +1,18 @@
 import {RESOURCES} from "./resource";
 import Buyable from "../abstract/buyable";
+import {Subject} from "rxjs";
 
 class Recipe extends Buyable{
     constructor(name, price, result) {
         super(price)
         this.name = name;
         this.result = result;
+        this.emitter = new Subject();
     }
 
     giveBuyResult() {
         Object.entries(this.result).forEach(([type, result]) => RESOURCES[type].update(result));
+        this.emitter.next({name: this.name, price: this.price, result: this.result})
     }
 }
 

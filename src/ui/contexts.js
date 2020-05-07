@@ -3,6 +3,9 @@ import React from "react"
 export const DebugContext = React.createContext({
     history: [],
     doLog: false,
+    showLog: false,
     toggleLog: () => {},
-    log: (obj) => {}
+    toggleShowLog: () => {},
+    log: (obj) => {},
+    clearLog: () => {}
 });

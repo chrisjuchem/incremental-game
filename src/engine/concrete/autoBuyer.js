@@ -23,12 +23,12 @@ class AutoBuyer extends Buyable {
         if (typeof recipe === "string") {
             recipe = RECIPES[recipe];
         }
-        self.recipe = recipe;
-        self.generator = new AutoBuyGenerator(baseTime, 0);
+        this.recipe = recipe;
+        this.generator = new AutoBuyGenerator(baseTime, 0);
     }
 
     giveBuyResult(amount) {
-        self.generator.upgrade(amount);
+        this.generator.upgrade(amount);
     }
 }
 

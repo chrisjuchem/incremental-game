@@ -3,6 +3,8 @@ import './AppContainer.css';
 import GameContainer from "./GameContainer";
 import MainMenu from "../components/MainMenu";
 import {DebugContext} from "../contexts";
+import DebugContextProvider from "../components/debug/DebugContextProvider";
+import {getFormattedTime} from "../../utils";
 
 function AppContainer() {
     let [inGame, setInGame] = useState(false);
@@ -11,17 +13,27 @@ function AppContainer() {
         {
             history: [],
             doLog: true,
+            showLog: true,
             toggleLog: () => {
                 setDebugContext(prevState => {
                     return {...prevState, doLog: !prevState.doLog}
                 })
             },
+            toggleShowLog: () => {
+                setDebugContext(prevState => {
+                    return {...prevState, showLog: !prevState.showLog}
+                })
+            },
             log: (obj) => setDebugContext(prevState => {
-                let date = new Date();
-                let timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
-                let logString = String(obj);
-                prevState.history.push([timestamp, logString])
+                if (prevState.doLog) {
+                    let timestamp = getFormattedTime(new Date());
+                    let logString = String(obj);
+                    prevState.history.push([timestamp, logString]);
+                }
                 return {...prevState, history: [...prevState.history]}
+            }),
+            clearLog: () => setDebugContext( prevState => {
+                return {...prevState, history: []}
             })
         }
     );
@@ -29,7 +41,7 @@ function AppContainer() {
     useEffect(() => {
         let debugKeypressHandler = (event) => {
             if (event.key === 'd') {
-                debugContext.toggleLog()
+                debugContext.toggleShowLog()
             }
         };
 
@@ -45,6 +57,8 @@ function AppContainer() {
                         <h1>Untitled Incremental Game</h1>
                     </div>
                     {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
+                    <br/>
+                    <DebugContextProvider/>
                 </div>
             </div>
         </DebugContext.Provider>

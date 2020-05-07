@@ -11,7 +11,6 @@ function BuyButton({recipe}) {
             <div className="col-3">
                 <button className="btn btn-primary btn-block"
                         onClick={() => {
-                            context.log(`bought ${recipe}`)
                             RECIPES[recipe].buy()
                         }}>
                     {recipe}
