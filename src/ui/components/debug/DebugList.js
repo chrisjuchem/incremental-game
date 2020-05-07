@@ -11,7 +11,7 @@ function DebugList({history}) {
         if (end !== null) {
             end.scrollIntoView({behavior: "smooth"})
         }
-    });
+    }, [history, end]);
 
     return(
         <div className="list-group max-vh-20 overflow-auto">

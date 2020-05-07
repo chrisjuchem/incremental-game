@@ -28,6 +28,10 @@ function AppContainer() {
                 if (prevState.doLog) {
                     let timestamp = getFormattedTime(new Date());
                     let logString = String(obj);
+
+                    if (prevState.history.length > 100) {
+                        prevState.history.shift()
+                    }
                     prevState.history.push([timestamp, logString]);
                 }
                 return {...prevState, history: [...prevState.history]}

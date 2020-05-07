@@ -1,10 +1,7 @@
-import React, {useContext} from "react";
+import React from "react";
 import {RECIPES} from "../../engine/concrete/recipe";
-import {DebugContext} from "../contexts";
 
 function BuyButton({recipe}) {
-
-    let context = useContext(DebugContext);
 
     return (
         <div className="row mb-4">
