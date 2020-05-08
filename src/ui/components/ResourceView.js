@@ -23,7 +23,7 @@ function ResourceView({resource}) {
     return (
         <div>
             <div>
-                {resource}: {count} <GeneratorView generator={RESOURCES[resource].generator} showBar={false}/>
+                {resource}: {count} <GeneratorView generator={RESOURCES[resource].generator} showBar={true}/>
             </div>
         </div>
     );
