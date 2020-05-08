@@ -4,7 +4,7 @@ import DebugList from "./DebugList";
 import {saveGameEvents, saveGameObserver} from "../../../engine/savegame";
 import {RECIPES} from "../../../engine/concrete/recipe";
 
-function DebugContextProvider() {
+function DebugView() {
 
     let context = useContext(DebugContext);
 
@@ -71,4 +71,4 @@ function DebugContextProvider() {
     )
 }
 
-export default DebugContextProvider
+export default DebugView
