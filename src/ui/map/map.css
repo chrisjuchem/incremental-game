@@ -1,15 +1,14 @@
 .mapContainer {
-    width: 600px;
-    height: 400px;
     border: 1px solid red;
     overflow: hidden;
+    perspective: 150px;
 }
 
 .innerMapContainer {
     overflow: hidden;
-    width: 800px;
-    height: 600px;
     border: 40px solid #005cbf;
     position: relative;
     cursor: move;
+
+    transform: rotateX(15deg);
 }
