@@ -1,5 +1,5 @@
 import React from "react";
-import {RECIPES} from "../../engine/concrete/recipe";
+import {RECIPES} from "../../../engine/concrete/recipe";
 
 function BuyButton({recipe}) {
 

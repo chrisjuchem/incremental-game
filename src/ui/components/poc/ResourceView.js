@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RESOURCES } from "../../engine/concrete/resource";
+import { RESOURCES } from "../../../engine/concrete/resource";
 import GeneratorView from "./GeneratorView";
 
 function ResourceView({resource}) {
