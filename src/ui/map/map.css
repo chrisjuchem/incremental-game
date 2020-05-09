@@ -9,6 +9,11 @@
     border: 5px solid #005cbf;
     position: relative;
     cursor: move;
+}
 
-    transform: rotateX(15deg);
+.factoryMap{
+    background-image: url(https://img.pngio.com/transparent-grid-png-free-transparent-gridpng-transparent-transparent-grid-2000_1000.png);
+    background-repeat: repeat;
+    width: 100%;
+    height: 100%;
 }
