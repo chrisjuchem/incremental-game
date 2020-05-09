@@ -1,12 +1,12 @@
 .mapContainer {
     border: 1px solid red;
     overflow: hidden;
-    perspective: 150px;
+    perspective: 350px;
 }
 
 .innerMapContainer {
     overflow: hidden;
-    border: 40px solid #005cbf;
+    border: 5px solid #005cbf;
     position: relative;
     cursor: move;
 

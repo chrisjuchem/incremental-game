@@ -1,17 +1,21 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './map.css';
 import FactoryMap from "./factoryMap";
 
 function FactoryMapContainer() {
-    const [dragging, setDragging] = useState(false);
-    const [offset, setOffset] = useState({x:0, y:0});
+    const innerMapW = 1200;
+    const innerMapH = 800;
+    const outerBoundsW = 900;
+    const outerBoundsH = 600
+    const minXTop = 132;
+    const maxXTop = innerMapW - outerBoundsW-129;
+    const skewX = 78;
 
-    const innerMapX = 1200;
-    const innerMapY = 800;
-    const outerBoundsX = 900;
-    const outerBoundsY = 600
-    const maxX = innerMapX - outerBoundsX;
-    const maxY = innerMapY - outerBoundsY;
+    const maxY = innerMapH - outerBoundsH + 76;
+    const minY = 102;
+
+    const [dragging, setDragging] = useState(false);
+    const [offset, setOffset] = useState({x:minXTop, y:minY});
 
     const clickHandler = (event) => {
         if (event.button === 0){
@@ -19,48 +23,61 @@ function FactoryMapContainer() {
         }
     };
 
-    const releaseHandler = (event) => {
-        if (event.button === 0){
-            setDragging(false);
-        }
-    }
-
-    const dragHandler = (event) => {
-        const mvX = event.movementX;
-        const mvY = event.movementY;
-        if (dragging) {
-            setOffset(old => {
-                return {
-                    x: Math.max(Math.min(old.x + mvX, 0), -maxX),
-                    y: Math.max(Math.min(old.y + mvY, 0), -maxY),
-                }
-            })
-            // PREVENT HIGHLIGHTING - THANKS STACKOVERFLOW
-            // https://stackoverflow.com/questions/29908261/prevent-text-selection-on-mouse-drag
-            if (document.selection) {
-                document.selection.empty()
-            } else {
-                window.getSelection().removeAllRanges()
+    useEffect(() => {
+        const releaseHandler = (event) => {
+            if (event.button === 0) {
+                setDragging(false);
             }
         }
-    }
+
+        window.addEventListener('mouseup', releaseHandler)
+        return () => window.removeEventListener('mouseup', releaseHandler)
+    }, [])
+
+    useEffect(() => {
+        const dragHandler = (event) => {
+            const mvX = event.movementX;
+            const mvY = event.movementY;
+            if (dragging) {
+                setOffset(old => {
+                    const y = Math.min(Math.max(old.y - mvY, minY), maxY)
+                    const yPercent = (y - minY) / (maxY - minY);
+                    // const skewScale = 2*yPercent-1
+                    const minX = minXTop - yPercent * skewX
+                    const maxX = maxXTop + yPercent * skewX
+                    const x = Math.min(Math.max(old.x - mvX, minX), maxX)
+                    // console.log(old.x, mvX, x, "//", old.y, mvY, y)
+                    // console.log(yPercent)
+                    return {x: x, y: y}
+                })
+                // PREVENT HIGHLIGHTING - THANKS STACKOVERFLOW
+                // https://stackoverflow.com/questions/29908261/prevent-text-selection-on-mouse-drag
+                if (document.selection) {
+                    document.selection.empty()
+                } else {
+                    window.getSelection().removeAllRanges()
+                }
+            }
+        }
+
+        window.addEventListener('mousemove', dragHandler)
+        return () => window.removeEventListener('mousemove', dragHandler)
+    }, [dragging, maxY, minY])
 
     return <div className='mapContainer'
                 style={{
-                    width: `${outerBoundsX}px`,
-                    height: `${outerBoundsY}px`,
+                    width: `${outerBoundsW}px`,
+                    height: `${outerBoundsH}px`,
                 }}>
         <div className="innerMapContainer"
              style={{
-                left: `${offset.x}px`,
-                top:`${offset.y}px`,
+                left: `${-offset.x}px`,
+                top:`${-offset.y}px`,
 
-                width: `${innerMapX}px`,
-                height: `${innerMapY}px`,
+                width: `${innerMapW}px`,
+                height: `${innerMapH}px`,
              }}
-             onMouseDown={clickHandler}
-             onMouseMove={dragHandler}
-             onMouseUp={releaseHandler}>
+             onMouseDown={clickHandler}>
             <FactoryMap/>
         </div>
     </div>
