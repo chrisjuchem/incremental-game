@@ -62,7 +62,7 @@ function FactoryMapContainer() {
 
         window.addEventListener('mousemove', dragHandler)
         return () => window.removeEventListener('mousemove', dragHandler)
-    }, [dragging, maxY, minY])
+    }, [dragging, maxY, minY, maxXTop])
 
     return <div className='mapContainer'
                 style={{
@@ -78,7 +78,7 @@ function FactoryMapContainer() {
                 height: `${innerMapH}px`,
              }}
              onMouseDown={clickHandler}>
-            <FactoryMap/>
+            <FactoryMap cols={4} rows={4} totalRowHeight={innerMapH}/>
         </div>
     </div>
 }

@@ -1,14 +1,42 @@
 .mapContainer {
-    border: 1px solid red;
+    box-shadow: 0 0 12px rgba(0,0,0,.4);
     overflow: hidden;
-    perspective: 350px;
+    perspective: 350px; /* TODO: consider moving this to the innerMapContainer as a transform: perspective() */
+    background-color: white;
 }
 
 .innerMapContainer {
     overflow: hidden;
-    border: 5px solid #005cbf;
     position: relative;
     cursor: move;
 
     transform: rotateX(15deg);
+    transform-style: preserve-3d;
+
+}
+
+.factoryMap {
+    background-color: var(--dark);
+}
+
+/*
+Currently this doesn't work, I think its because the inverse rotation happens around the center of the element,
+when it needs to be around the center of the map itself
+*/
+.unskewed {
+    display: inline-block;
+    transform-origin: inherit;
+    transform: rotateX(-15deg);
+}
+
+.map-bg-blue {
+    background-color: rgba(0, 0, 255, 0.3);
+}
+
+.map-bg-red {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.map-bg-green {
+    background-color: rgba(0, 255, 0, 0.3);
 }
