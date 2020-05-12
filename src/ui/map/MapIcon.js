@@ -1,20 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 
-function MapIcon({displacement, debug}) {
+function MapIcon({displacement}) {
 
-    useEffect(() => {
-        if (debug) {
-            // console.log(displacement)
-        }
-    }, [debug, displacement])
-
-    return <div style={{
-                position: "absolute",
-                left:`${displacement.x + 1}px`,
-                top:`${displacement.y + 2}px`,
-                width:"50px",
-                height:"50px",
-                backgroundColor: "red",
+    return <div className="mapIcon" style={{
+                left:`${displacement.x}px`,
+                top:`${displacement.y}px`,
             }}>
         TEST
     </div>

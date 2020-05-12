@@ -3,14 +3,14 @@ import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 import BuyResourcePane from "../components/poc/BuyResourcePane";
 import {RECIPES} from "../../engine/concrete/recipe";
-import FactoryMapContainer from "../map/factoryMapContainer";
+import MapContainer from "../map/MapContainer";
 
 function GameContainer() {
 
     return (
         <div className="container game-container">
             <AutoSaveComponent saveInterval={5}/>
-            <FactoryMapContainer/>
+            <MapContainer/>
             <div className="row">
                 <ResourceView resource='a'/>
             </div>

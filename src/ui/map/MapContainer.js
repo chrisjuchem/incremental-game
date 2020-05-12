@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from "react";
 import './map.css';
-import FactoryMap from "./factoryMap";
-import MapIcon from "./MapIcon";
+import MapBackgroundLayer from "./MapBackgroundLayer";
+import MapIconLayer from "./MapIconLayer";
 
-function FactoryMapContainer() {
+function MapContainer() {
     const stopAtBounds = true;
 
     const innerMapW = 3600;
@@ -15,10 +15,7 @@ function FactoryMapContainer() {
     const dragRange = {x: innerMapW - outerBoundsW - 1065, y: innerMapH - outerBoundsH - 503}
 
     const [dragging, setDragging] = useState(false);
-    const [offset, setOffset] = useState(
-        {x:0, y:0}
-        // {x:-perspectiveOffset.x, y:dragRange.y}
-        );
+    const [offset, setOffset] = useState({x:0, y:0});
 
     const clickHandler = (event) => {
         if (event.button === 0){
@@ -66,7 +63,7 @@ function FactoryMapContainer() {
         return () => window.removeEventListener('mousemove', dragHandler)
     }, [dragging, dragRange, stopAtBounds])
 
-    const getDisplacement = useCallback((mapX, mapY, debug) => {
+    const getDisplacement = useCallback((mapX, mapY) => {
         //====================== Calc Y ======================
         const baseScreenY = (mapY - offset.y);
         const ys = [0, 34, 75, 115, 158, 206, 257, 313, 375, 441, 514, 596, 700, 811] // I literally just hand measured all of these. Help.
@@ -80,56 +77,45 @@ function FactoryMapContainer() {
 
         // Hack: linear interpolation for each tile row
         //     top of nearest tile +         percent through tile * dist to next tile
-        let newY = ys[roundedTile] + ((((baseScreenY/100 % 1) + 2) % 1) * (ys[roundedTile+1] - ys[roundedTile]))
-        //   %1 + 2 handles negatives somewhat gracefully    ^
-
-        // if(debug) console.log(baseScreenY, roundedTile, newY)
+        let newY = ys[roundedTile] + ((((baseScreenY/100 % 1) + 1) % 1) * (ys[roundedTile+1] - ys[roundedTile]))
+        //    %1 +1 %1 handles negatives somewhat gracefully    ^
 
         //====================== Calc X ======================
         const xModifier = ((dragRange.x + outerBoundsW) / innerMapW) * 0.64777
         let newX = (mapX - offset.x) * xModifier
-        //todo flair out x by (some distance) scaled by screen height (newY)
+        // flair out the bottom proportionally to the screen height
         newX += (newX - outerBoundsW/2) * .6 * (newY/outerBoundsH)
 
         return {x: newX , y: newY}
-    }, [dragRange, offset, perspectiveOffset])
+    }, [dragRange, offset])
 
-    return <div className='mapContainer'
-                style={{
-                    width: `${outerBoundsW}px`,
-                    height: `${outerBoundsH}px`,
-                }}>
-        <div className="innerMapContainer"
-             style={{
-                 width: `${innerMapW}px`,
-                 height: `${innerMapH}px`,
-                 transformStyle:"preserve-3d"
-             }}
-             onMouseDown={clickHandler}>
-            <div className="mapLayer mapBGLayer" style={{
-
-                transform: `rotateX(15deg) translateX(${-offset.x - perspectiveOffset.x}px) translateY(${-offset.y - perspectiveOffset.y}px)`,
-                // transform: `rotateX(15deg) translateX(${-offset.x }px) translateY(${-offset.y }px)`,
+    return (
+        <div
+            className='mapContainer'
+            style={{
+                width: `${outerBoundsW}px`,
+                height: `${outerBoundsH}px`,
             }}>
-                <div className="factoryMap"/>
-                {/*<FactoryMap cols={4} rows={4} totalRowHeight={innerMapH}/>*/}
-            </div>
-
-
-
-
-
-            <div className="mapLayer mapIconLayer"
+            <div className="innerMapContainer"
                  style={{
-                    // transform: `translateX(${-offset.x}px) translateY(${-offset.y}px)`,
-                 }}>
-                {
-                    new Array(4).fill(0).map((_, i) =>
-                        new Array(3).fill(0).map((_, j) => [i*800, j*800])).reduce((prev, next) => prev.concat(next))
-                   .map(([x,y, debug]) => <MapIcon displacement={getDisplacement(x, y, x===800 && y===800)} debug={x===0 && y===0}/>)}
+                     width: `${innerMapW}px`,
+                     height: `${innerMapH}px`,
+                     transformStyle:"preserve-3d"
+                 }}
+                 onMouseDown={clickHandler}>
+
+                <div className="mapLayer" style={{
+                    transform: `rotateX(15deg) translateX(${-offset.x - perspectiveOffset.x}px) translateY(${-offset.y - perspectiveOffset.y}px)`,
+                }}>
+                    <MapBackgroundLayer/>
+                </div>
+
+                <div className="mapLayer">
+                    <MapIconLayer getDisplacement={getDisplacement}/>
+                </div>
             </div>
         </div>
-    </div>
+    );
 }
 
-export default FactoryMapContainer;
+export default MapContainer;
