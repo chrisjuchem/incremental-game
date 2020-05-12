@@ -6,16 +6,20 @@ import MapIconLayer from "./MapIconLayer";
 function MapContainer() {
     const stopAtBounds = true;
 
-    const innerMapW = 3600;
-    const innerMapH = 2400;
-    const outerBoundsW = 900;
-    const outerBoundsH = 600;
+    // Values used as raw coordinates
+    const mapW = 3600;
+    const mapH = 2400;
+    // Visual size of the map
+    const viewportW = 900;
+    const viewportH = 600;
 
+    // Pixels of mouse drag to scroll from one end to the other of the map (after perspective is applied)
+    const dragRange = {x: mapW - viewportW - 1065, y: mapH - viewportH - 503}
+    // Offset to apply to the map after perspective to line it up at 0,0
     const perspectiveOffset = {x:534,y:410};
-    const dragRange = {x: innerMapW - outerBoundsW - 1065, y: innerMapH - outerBoundsH - 503}
 
     const [dragging, setDragging] = useState(false);
-    const [offset, setOffset] = useState({x:0, y:0});
+    const [displacement, setDisplacement] = useState({x:0, y:0});
 
     const clickHandler = (event) => {
         if (event.button === 0){
@@ -36,10 +40,10 @@ function MapContainer() {
 
     useEffect(() => {
         const dragHandler = (event) => {
-            const mvX = event.movementX;
-            const mvY = event.movementY;
             if (dragging) {
-                setOffset(old => {
+                const mvX = event.movementX;
+                const mvY = event.movementY;
+                setDisplacement(old => {
                     //Todo scale by where in the window was grapped/you are so that the point you grab stays exactly under the mouse
                     let x = old.x - mvX;
                     let y = old.y - mvY;
@@ -65,7 +69,7 @@ function MapContainer() {
 
     const getDisplacement = useCallback((mapX, mapY) => {
         //====================== Calc Y ======================
-        const baseScreenY = (mapY - offset.y);
+        const baseScreenY = (mapY - displacement.y);
         const ys = [0, 34, 75, 115, 158, 206, 257, 313, 375, 441, 514, 596, 700, 811] // I literally just hand measured all of these. Help.
         let roundedTile = Math.min(Math.floor(baseScreenY/100), 12);
 
@@ -81,31 +85,31 @@ function MapContainer() {
         //    %1 +1 %1 handles negatives somewhat gracefully    ^
 
         //====================== Calc X ======================
-        const xModifier = ((dragRange.x + outerBoundsW) / innerMapW) * 0.64777
-        let newX = (mapX - offset.x) * xModifier
+        const xModifier = ((dragRange.x + viewportW) / mapW) * 0.64777
+        let newX = (mapX - displacement.x) * xModifier
         // flair out the bottom proportionally to the screen height
-        newX += (newX - outerBoundsW/2) * .6 * (newY/outerBoundsH)
+        newX += (newX - viewportW/2) * .6 * (newY/viewportH)
 
         return {x: newX , y: newY}
-    }, [dragRange, offset])
+    }, [dragRange, displacement])
 
     return (
         <div
             className='mapContainer'
             style={{
-                width: `${outerBoundsW}px`,
-                height: `${outerBoundsH}px`,
+                width: `${viewportW}px`,
+                height: `${viewportH}px`,
             }}>
             <div className="innerMapContainer"
                  style={{
-                     width: `${innerMapW}px`,
-                     height: `${innerMapH}px`,
+                     width: `${mapW}px`,
+                     height: `${mapH}px`,
                      transformStyle:"preserve-3d"
                  }}
                  onMouseDown={clickHandler}>
 
                 <div className="mapLayer" style={{
-                    transform: `rotateX(15deg) translateX(${-offset.x - perspectiveOffset.x}px) translateY(${-offset.y - perspectiveOffset.y}px)`,
+                    transform: `rotateX(15deg) translateX(${-displacement.x - perspectiveOffset.x}px) translateY(${-displacement.y - perspectiveOffset.y}px)`,
                 }}>
                     <MapBackgroundLayer/>
                 </div>
