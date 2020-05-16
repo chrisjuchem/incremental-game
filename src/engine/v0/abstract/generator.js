@@ -1,4 +1,4 @@
-import {clock} from "../clock";
+import {clock} from "../../clock";
 import {BehaviorSubject} from "rxjs";
 
 class Generator {

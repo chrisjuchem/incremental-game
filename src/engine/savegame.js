@@ -1,4 +1,4 @@
-import {RESOURCES} from "./concrete/resource";
+import {RESOURCES} from "./v0/concrete/resource";
 import {Subject} from "rxjs";
 
 const SAVE_KEY = "saved-game";

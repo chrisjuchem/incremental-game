@@ -2,7 +2,7 @@ import ResourceView from "../components/poc/ResourceView";
 import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 import BuyResourcePane from "../components/poc/BuyResourcePane";
-import {RECIPES} from "../../engine/concrete/recipe";
+import {RECIPES} from "../../engine/v0/concrete/recipe";
 import MapContainer from "../map/MapContainer";
 
 function GameContainer() {
