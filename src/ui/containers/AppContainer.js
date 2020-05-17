@@ -14,7 +14,7 @@ function AppContainer() {
         </div>
         {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
         <br/>
-        <DebugView/>
+        {/*<DebugView/>*/}
     </div>
 
     return (
