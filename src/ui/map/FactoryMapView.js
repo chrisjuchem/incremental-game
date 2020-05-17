@@ -4,7 +4,7 @@ import factories from "../../engine/v1/gamestate/factory";
 import gamestateEmitter from "../../engine/v1/gamestate/gamestate";
 import {pluck} from "rxjs/operators";
 
-export default function FactoryView({factoryName}) {
+export default function FactoryMapView({factoryName}) {
     const factoryInfo = useMemo(() => factories[factoryName].info, [factoryName])
 
     const [progress, setProgress] = useState(0)
