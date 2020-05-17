@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './AppContainer.css';
 import GameContainer from "./GameContainer";
 import MainMenu from "../components/MainMenu";
-import DebugView from "../components/debug/DebugView";
+// import DebugView from "../components/debug/DebugView";
 import DebugContextProvider from "../components/debug/DebugProviderContext";
 
 function AppContainer() {

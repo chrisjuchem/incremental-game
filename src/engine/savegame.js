@@ -1,7 +1,7 @@
 
 import {Subject} from "rxjs";
 
-const SAVE_KEY = "saved-game";
+// const SAVE_KEY = "saved-game";
 
 const saveGameObserver = new Subject();
 const saveGameEvents = {
