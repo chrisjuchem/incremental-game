@@ -23,10 +23,11 @@ export default function FactoryMapView({factoryName}) {
         return sub.unsubscribe;
     },[factoryName])
 
-    return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY} className={"factoryIcon"}>
+    return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY}>
         <div className="factoryNameplate iconDecorator">
             {factoryInfo.name}
         </div>
+        <div className="factoryIcon"/>
         <div className="factoryMapInfo iconDecorator">
             {
                 progress ?

@@ -39,14 +39,14 @@
 
 .mapIcon {
     position:absolute;
-    width:50px;
-    height:50px;
-    transform:translate(-50%, -50%);
 }
 
 .factoryIcon {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b6/Factory_1b.svg);
     background-size: 100% 100%;
+    width:50px;
+    height:50px;
+    transform:translate(-50%, -50%);
 }
 
 .iconDecorator {
@@ -56,14 +56,14 @@
 }
 
 .factoryNameplate {
-    top: -20px;
-    left: -75px;
+    top: -45px;
+    left: -100px;
     width: 200px;
 }
 
 .factoryMapInfo {
-    top: 50px;
-    left: -25px;
+    top: 25px;
+    left: -50px;
 }
 
 .factoryProgressBar {

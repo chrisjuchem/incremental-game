@@ -5,7 +5,7 @@ function MapIcon({mapX, mapY, children, className=""}) {
     const mapCtx = useContext(MapContext);
     const disp = useMemo(() =>  mapCtx.getIconDisplacement(mapX, mapY), [mapX, mapY, mapCtx])
 
-    return <div className={`mapIcon ${className}`} style={{
+    return <div className="mapIcon" style={{
                 left:`${disp.x}px`,
                 top:`${disp.y}px`,
             }}>
