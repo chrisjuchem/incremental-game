@@ -34,7 +34,6 @@ class Factory {
         }
         // cap at 100%
         this.production = Math.min(this.production, baseTime);
-        if(this.recipe.displayName === "Convert an X to a Y") console.log(dt, this.production)
     }
 }
 

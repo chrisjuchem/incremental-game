@@ -1,5 +1,5 @@
 import {clock} from "../../clock";
-import {map} from 'rxjs/operators'
+import {tap, map, publishBehavior} from 'rxjs/operators';
 import resourceCount from "./resources";
 import factories from "./factory";
 import {FACTORY_NAME_VERDANSK, FACTORY_NAME_VERDANSK_2} from "../static/factoryInfo";
@@ -35,14 +35,18 @@ function doTick(dt) {
     capResources();
 }
 
-const gamestateEmitter = clock.pipe(map(dt => {
-    console.log(dt) // x 5
-    doTick(dt);
+function buildMessage() {
     return {
         cash: cash,
         factories: factories,
         resources: resourceCount
     }
-}));
+}
 
+const gamestateEmitter = clock.pipe(
+    tap(doTick),
+    map(buildMessage),
+    publishBehavior({})
+);
+gamestateEmitter.connect();
 export default gamestateEmitter;
