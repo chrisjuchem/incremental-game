@@ -1,4 +1,5 @@
 import factoryInfo from '../static/factoryInfo'
+import recipeInfo from "../static/recipeInfo";
 
 class Factory {
     constructor(info) {
@@ -7,6 +8,10 @@ class Factory {
         // enabled
         // switching_for //time
         this.production = 0
+    }
+
+    setRecipeByName(recipeName) {
+        this.recipe = recipeInfo[recipeName]
     }
 
     tick(dt) {
@@ -19,12 +24,17 @@ class Factory {
         const baseTime = this.recipe.getTime(this.info.conditions);
         const generated = Math.floor(this.production / baseTime);
 
-        //todo wait for resources instead of starting over
-        this.production = this.production % baseTime;
         if (generated) {
             const affordable = this.recipe.affordable(generated);
-            this.recipe.buy(affordable);
+            if (affordable) {
+                this.recipe.buy(affordable);
+            }
+            // spend only the production that was used
+            this.production -= affordable * baseTime;
         }
+        // cap at 100%
+        this.production = Math.min(this.production, baseTime);
+        if(this.recipe.displayName === "Convert an X to a Y") console.log(dt, this.production)
     }
 }
 

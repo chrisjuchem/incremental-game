@@ -10,7 +10,7 @@ class RecipeInfo {
     }
 
     getTime(factoryConditions) {
-        return this._time * factoryConditions.rateModifier;  // Todo: check upgrades
+        return this._time / factoryConditions.rateModifier;  // Todo: check upgrades
     }
 
     getCosts() {
@@ -42,9 +42,11 @@ class RecipeInfo {
 
 
 export const RECIPE_NAME_FAB_X = 'fabricate_x';
+export const RECIPE_NAME_CONVERT_Y = 'convert_y';
 
 export const ALL_RECIPE_NAMES = [
     RECIPE_NAME_FAB_X,
+    RECIPE_NAME_CONVERT_Y,
 ];
 
 export default {
@@ -56,5 +58,17 @@ export default {
             amount: 1
         }],
         5000, //ms
+    ),
+    [RECIPE_NAME_CONVERT_Y]: new RecipeInfo(
+        "Convert an X to a Y",
+        [{
+            resource: r.RESOURCE_NAME_X,
+            amount: 1
+        }],
+        [{
+            resource: r.RESOURCE_NAME_Y,
+            amount: 1
+        }],
+        6000, //ms
     ),
 };

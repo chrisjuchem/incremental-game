@@ -9,3 +9,7 @@ export const DebugContext = React.createContext({
     log: (obj) => {},
     clearLog: () => {}
 });
+
+export const MapContext = React.createContext({
+    getIconDisplacement: (x, y) => {}
+})
