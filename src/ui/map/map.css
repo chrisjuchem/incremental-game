@@ -37,33 +37,44 @@
 .mapIconLayer {
 }
 
-.mapIcon {
+.mapElement {
     position:absolute;
+    --icon-size:40px;
+    transform-style: preserve-3d;
+}
+
+.mapIcon {
+    position: absolute;
+    transform:translate(-50%, -50%);
 }
 
 .factoryIcon {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b6/Factory_1b.svg);
     background-size: 100% 100%;
-    width:50px;
-    height:50px;
-    transform:translate(-50%, -50%);
+    width:var(--icon-size);
+    height:var(--icon-size);
 }
 
 .iconDecorator {
     color: #000000;
     position: absolute;
     text-align: center;
+    transform: translateX(-50%);
+}
+
+.iconDecoratorTop {
+    bottom: calc(var(--icon-size)/2);
+}
+
+.iconDecoratorBottom {
+    top: calc(var(--icon-size)/2);
 }
 
 .factoryNameplate {
-    top: -45px;
-    left: -100px;
     width: 200px;
 }
 
 .factoryMapInfo {
-    top: 25px;
-    left: -50px;
 }
 
 .factoryProgressBar {
