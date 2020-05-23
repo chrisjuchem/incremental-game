@@ -23,7 +23,12 @@ export default function FactoryMapView({factoryName}) {
         return sub.unsubscribe;
     },[factoryName])
 
-    return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY} iconClass="factoryIcon">
+    const clickFunc = useMemo(() => (e) => {
+        console.log(factoryName);
+        e.stopPropagation()
+    }, [factoryName])
+
+    return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY} iconClass="factoryIcon" clickFunc={clickFunc}>
         <div className="factoryNameplate iconDecorator iconDecoratorTop">
             {factoryInfo.name}
         </div>

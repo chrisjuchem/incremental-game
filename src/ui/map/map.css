@@ -8,9 +8,13 @@
 .innerMapContainer {
     overflow: hidden;
     position: relative;
-    cursor: move;
     transform-style: preserve-3d;
-
+}
+.innerMapContainer-drag-false {
+    cursor: grab;
+}
+.innerMapContainer-drag-true {
+    cursor: grabbing;
 }
 
 .mapBackgroundImage {
@@ -46,6 +50,9 @@
 .mapIcon {
     position: absolute;
     transform:translate(-50%, -50%);
+}
+.innerMapContainer-drag-false .mapIcon {
+    cursor: pointer;
 }
 
 .factoryIcon {

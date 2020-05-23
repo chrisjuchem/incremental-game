@@ -101,7 +101,7 @@ function MapContainer() {
                 width: `${viewportW}px`,
                 height: `${viewportH}px`,
             }}>
-            <div className="innerMapContainer"
+            <div className={`innerMapContainer innerMapContainer-drag-${dragging}`}
                  style={{
                      width: `${mapW}px`,
                      height: `${mapH}px`,
