@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {pluck} from "rxjs/operators";
-import gamestateEmitter from "../../../engine/v1/gamestate/gamestate";
+import gamestateEmitter from "../../engine/v1/gamestate/gamestate";
 
 export default function CashView() {
     const [cash, setCash] = useState(0);

@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
-import gamestateEmitter from "../../../engine/v1/gamestate/gamestate";
+import gamestateEmitter from "../../engine/v1/gamestate/gamestate";
 import {pluck} from "rxjs/operators";
-import resourceInfo from "../../../engine/v1/static/resourceInfo";
+import resourceInfo from "../../engine/v1/static/resourceInfo";
 
 export default function ResourceView({resourceName}) {
     const [count, setCount] = useState(0);

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react"
-import {DebugContext} from "../../contexts";
+import {DebugContext} from "../contexts";
 import DebugList from "./DebugList";
-import {saveGameEvents, saveGameObserver} from "../../../engine/savegame";
+import {saveGameEvents, saveGameObserver} from "../../engine/savegame";
 const RECIPES = ["fixme"];// import {RECIPES} from "../../../engine/v0/concrete/recipe";
 
 function DebugView() {

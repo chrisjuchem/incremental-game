@@ -1,5 +1,5 @@
 import React from "react";
-import {ALL_RESOURCE_NAMES} from "../../../engine/v1/static/resourceInfo";
+import {ALL_RESOURCE_NAMES} from "../../engine/v1/static/resourceInfo";
 import ResourceView from "./ResourceView";
 
 export default function ResourcesView() {

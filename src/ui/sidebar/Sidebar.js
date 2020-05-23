@@ -1,6 +1,6 @@
 import React from "react";
-import CashView from "../components/v1/CashView";
-import ResourcesView from "../components/v1/ResourcesView";
+import CashView from "./CashView";
+import ResourcesView from "./ResourcesView";
 
 export default function Sidebar() {
     return <div className="sidebar">

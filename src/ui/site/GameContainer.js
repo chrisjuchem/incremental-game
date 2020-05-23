@@ -1,7 +1,7 @@
 // import AutoSaveComponent from "../components/AutoSaveComponent";
 import React from "react";
 import MapContainer from "../map/MapContainer";
-import Sidebar from "./Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 
 function GameContainer() {
 

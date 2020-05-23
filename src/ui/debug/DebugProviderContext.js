@@ -1,7 +1,7 @@
 import React from "react";
-import {DebugContext} from "../../contexts";
+import {DebugContext} from "../contexts";
 import {useEffect, useState} from "react";
-import {getFormattedTime} from "../../../utils";
+import {getFormattedTime} from "../../utils";
 
 function DebugContextProvider({inner}) {
 
