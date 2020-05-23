@@ -39,8 +39,39 @@
 
 .mapIcon {
     position:absolute;
+}
+
+.factoryIcon {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b6/Factory_1b.svg);
+    background-size: 100% 100%;
     width:50px;
     height:50px;
     transform:translate(-50%, -50%);
-    background-color:red;
+}
+
+.iconDecorator {
+    color: #000000;
+    position: absolute;
+    text-align: center;
+}
+
+.factoryNameplate {
+    top: -45px;
+    left: -100px;
+    width: 200px;
+}
+
+.factoryMapInfo {
+    top: 25px;
+    left: -50px;
+}
+
+.factoryProgressBar {
+    width: 70px;
+    margin: auto;
+}
+
+.factoryRate {
+    color: #000000;
+    width: 100px;
 }

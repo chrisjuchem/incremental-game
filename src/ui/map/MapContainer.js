@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import './map.css';
 import MapBackgroundLayer from "./MapBackgroundLayer";
 import MapIconLayer from "./MapIconLayer";
+import {MapContext} from "../contexts";
 
 function MapContainer() {
     const stopAtBounds = true;
@@ -115,7 +116,9 @@ function MapContainer() {
                 </div>
 
                 <div className="mapLayer">
-                    <MapIconLayer getDisplacement={getDisplacement}/>
+                    <MapContext.Provider value={{getIconDisplacement: getDisplacement}}>
+                        <MapIconLayer/>
+                    </MapContext.Provider>
                 </div>
             </div>
         </div>

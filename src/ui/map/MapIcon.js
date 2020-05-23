@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useContext, useMemo} from "react";
+import {MapContext} from "../contexts";
 
-function MapIcon({displacement}) {
+function MapIcon({mapX, mapY, children, className=""}) {
+    const mapCtx = useContext(MapContext);
+    const disp = useMemo(() =>  mapCtx.getIconDisplacement(mapX, mapY), [mapX, mapY, mapCtx])
 
     return <div className="mapIcon" style={{
-                left:`${displacement.x}px`,
-                top:`${displacement.y}px`,
+                left:`${disp.x}px`,
+                top:`${disp.y}px`,
             }}>
-        TEST
+        {children}
     </div>
 }
 
