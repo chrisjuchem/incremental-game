@@ -1,9 +1,13 @@
 #Untitled Incremental Game
 [Design doc](https://docs.google.com/document/d/1AwAO0eUtcE3wp-E5ibXgckvVNVrNEi2so1anR1anvWY/edit)
 
+## Todo List
+- Reorganize ui files
+- Clean up Map Icon html/css structure
+- Saving/Loading
+- Integrate debug view with new engine
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
