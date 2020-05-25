@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import MapIcon from "../map/MapIcon";
 import factories from "../../engine/v1/gamestate/factory";
 import FactoryDetailView from "./FactoryDetailView";
@@ -10,15 +10,21 @@ export default function FactoryMapDisplay({factoryName}) {
     const [showStats, setShowStats] = useState(false)
 
     const clickFunc = useCallback((e) => {
-        const clickAwayFunc = (e) => {
-            setShowStats(false);
-            window.removeEventListener("mousedown", clickAwayFunc)
-        }
-        window.addEventListener("mousedown", clickAwayFunc)
-
         setShowStats(true);
-        e.stopPropagation()
     }, [setShowStats]);
+
+    // This needs to be separate from clickFunc else the same event will show and then hide the overlay is it propagates
+    useEffect(() => {
+        if (showStats) {
+            const clickAwayFunc = (e) => {
+                setShowStats(false);
+                window.removeEventListener("mousedown", clickAwayFunc)
+                window.removeEventListener("click", clickAwayFunc)
+            }
+            window.addEventListener("mousedown", clickAwayFunc)
+            window.addEventListener("click", clickAwayFunc)
+        }
+    }, [showStats])
 
     return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY} iconClass="factoryIcon" clickFunc={clickFunc}>
         <div className="iconDecorators">
