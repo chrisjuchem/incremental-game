@@ -10,3 +10,8 @@
 .sidebar {
     flex-grow: 1;
 }
+
+.globalEventHandler {
+    width: 100vw;
+    height: 100vh;
+}

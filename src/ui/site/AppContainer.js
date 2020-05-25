@@ -1,24 +1,27 @@
 import React, {useState} from "react";
-import './AppContainer.css';
+import './appContainer.css';
 import GameContainer from "./GameContainer";
 import MainMenu from "./MainMenu";
 // import DebugView from "../components/debug/DebugView";
-import DebugContextProvider from "../debug/DebugProviderContext";
+import DebugContextProvider from "../debug/DebugContextProvider";
+import GlobalEventProvider from "./GlobalEventProvdier";
 
 function AppContainer() {
     let [inGame, setInGame] = useState(false);
 
-    let inner = <div className="container text-light">
-        <div className="row pt-3">
-            <h1>Untitled Incremental Game</h1>
-        </div>
-        {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
-        <br/>
-        {/*<DebugView/>*/}
-    </div>
-
     return (
-        <DebugContextProvider inner={inner}/>
+        <GlobalEventProvider>
+            <DebugContextProvider>
+                <div className="container text-light">
+                    <div className="row pt-3">
+                        <h1>Untitled Incremental Game</h1>
+                    </div>
+                    {inGame ? <GameContainer/> : <MainMenu setInGame={setInGame}/> }
+                    <br/>
+                    {/*<DebugView/>*/}
+                </div>
+            </DebugContextProvider>
+        </GlobalEventProvider>
     );
 }
 

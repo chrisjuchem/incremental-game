@@ -9,7 +9,7 @@ function MapIcon({mapX, mapY, children, iconClass="", clickFunc}) {
                 left:`${disp.x}px`,
                 top:`${disp.y}px`,
             }}>
-        <div className={`mapIcon ${iconClass}`} onMouseDown={clickFunc}/>
+        <div className={`mapIcon ${iconClass}`} onClick={clickFunc} onMouseDown={e => e.stopPropagation()}/>
         {children}
     </div>
 }

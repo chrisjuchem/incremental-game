@@ -3,7 +3,7 @@ import {DebugContext} from "../contexts";
 import {useEffect, useState} from "react";
 import {getFormattedTime} from "../../utils";
 
-function DebugContextProvider({inner}) {
+function DebugContextProvider({children}) {
 
     let [debugContext, setDebugContext] = useState(
         {
@@ -50,7 +50,7 @@ function DebugContextProvider({inner}) {
     }, [debugContext]);
     
     return <DebugContext.Provider value={debugContext}>
-        {inner}
+        {children}
     </DebugContext.Provider>
 }
 
