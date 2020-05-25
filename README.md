@@ -4,8 +4,6 @@
 ## Todo List
 - Factory stats details
 - Let factory stats overflow map bounds
-- Make factory stats close when map drag starts
-- Convert map dragging to global events
 - Saving/Loading
 - Integrate debug view with new engine
 

@@ -13,8 +13,3 @@ export const DebugContext = React.createContext({
 export const MapContext = React.createContext({
     getIconDisplacement: (x, y) => {}
 })
-
-export const GlobalEventContext = React.createContext({
-    addHandler: () => {},
-    removeHandler: () => {}
-})

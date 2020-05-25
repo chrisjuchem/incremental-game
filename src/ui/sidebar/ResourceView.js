@@ -17,6 +17,6 @@ export default function ResourceView({resourceName}) {
     const name = useMemo(() => resourceInfo[resourceName].displayName, [resourceName]);
 
     return <div>
-        {name}: {count}
+        {name}: {count} / {resourceInfo[resourceName].getCap()}
     </div>
 }

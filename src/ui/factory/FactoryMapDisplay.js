@@ -1,8 +1,7 @@
-import React, {useCallback, useContext, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import MapIcon from "../map/MapIcon";
 import factories from "../../engine/v1/gamestate/factory";
 import FactoryDetailView from "./FactoryDetailView";
-import {GlobalEventContext} from "../contexts";
 import FactoryProgressBar from "./FactoryProgressBar";
 
 export default function FactoryMapDisplay({factoryName}) {
@@ -10,16 +9,16 @@ export default function FactoryMapDisplay({factoryName}) {
 
     const [showStats, setShowStats] = useState(false)
 
-    const globalHandlers = useContext(GlobalEventContext);
     const clickFunc = useCallback((e) => {
         const clickAwayFunc = (e) => {
             setShowStats(false);
-            globalHandlers.removeHandler("onClick", clickAwayFunc)
+            window.removeEventListener("mousedown", clickAwayFunc)
         }
-        globalHandlers.addHandler("onClick", clickAwayFunc)
+        window.addEventListener("mousedown", clickAwayFunc)
 
         setShowStats(true);
-    }, [setShowStats, globalHandlers]);
+        e.stopPropagation()
+    }, [setShowStats]);
 
     return <MapIcon mapX={factoryInfo.mapX} mapY={factoryInfo.mapY} iconClass="factoryIcon" clickFunc={clickFunc}>
         <div className="iconDecorators">
