@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import gamestateEmitter from "../../engine/v1/gamestate/gamestate";
 import {pluck} from "rxjs/operators";
 
-export default function FactoryProgressBar({factoryName, displayName}) {
+export default function FactoryProgressBar({factoryName}) {
     const [progress, setProgress] = useState(false)
     const [rate, setRate] = useState(0)
 
@@ -35,7 +35,7 @@ export default function FactoryProgressBar({factoryName, displayName}) {
                 null
         }
         <div className="factoryRate">
-            {rate.toFixed(3)} {displayName}/s
+            {rate.toFixed(3)}/s
         </div>
     </div>
 }

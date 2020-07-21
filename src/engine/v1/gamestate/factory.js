@@ -11,7 +11,11 @@ class Factory {
     }
 
     setRecipeByName(recipeName) {
-        this.recipe = recipeInfo[recipeName]
+        this.setRecipe(recipeInfo[recipeName]);
+    }
+
+    setRecipe(recipe) {
+        this.recipe = recipe;
     }
 
     tick(dt) {

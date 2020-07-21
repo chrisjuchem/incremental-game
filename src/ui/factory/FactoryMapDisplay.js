@@ -31,11 +31,11 @@ export default function FactoryMapDisplay({factoryName}) {
             <div className="factoryNameplate iconDecorator iconDecoratorTop">
                 {factoryInfo.name}
             </div>
-            <FactoryProgressBar factoryName={factoryName} displayName={factoryInfo.displayName}/>
+            <FactoryProgressBar factoryName={factoryName}/>
         </div>
         {
             showStats ?
-                <FactoryDetailView/> :
+                <FactoryDetailView factoryName={factoryName}/> :
                 null
         }
     </MapIcon>
